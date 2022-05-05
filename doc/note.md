@@ -8,22 +8,33 @@
 
 #### 云服务器：Centos7.6 livego-tool
 
-- 获取{key}:  `http://1.15.121.202:8090/control/get?room={room}`
+- 获取{key}:  
 
-- 拉流:       `http://1.15.121.202:7001/live/{room}`
+```text
+http://1.15.121.202:8090/control/get?room={room}
+```
 
-- 推流:       `rtmp://1.15.121.202:1935/live  {key}`
+- 拉流:
+
+```text
+http://1.15.121.202:7001/live/{room}
+```
+
+- 推流:
+
+```text
+rtmp://1.15.121.202:1935/live  {key}
+```
 
 #### 本地服务器: Ubuntu20.0 Nginx Nginx-http-flv-rmpt Nginx.conf
 
-- 推流
-ffmpeg推流:
+- ffmpeg推流:
 
 ```bash
 ffmpeg -re -i xxx.mp4 -vcodec libx264 -acodec aac -f flv rtmp://127.0.0.1:1935/live/{room}
 ```
 
-OBS推流:
+- OBS推流:
 
 ```text
 rtmp://127.0.0.1:1935/live  key:{room}
@@ -41,9 +52,23 @@ http://127.0.0.1:8080/live?app=live&stream={room}
 
 换一下公网ip
 
-- 获取{key}:  `http://{ip}:port/control/get?room={room}`
-- 拉流:       `http://{ip}:port/{roomip}`
-- 推流:       `rtmp://{ip}:port/live  密钥{key}`
+- 获取:  
+
+```text
+http://{ip}:port/control/get?room={room}
+```
+
+- 拉流:  
+
+```text
+http://{ip}:port/{roomip}
+```
+
+- 推流:  
+
+```text
+rtmp://{ip}:port/live  密钥{key}
+```
 
 ### 推拉流方案选择
 
