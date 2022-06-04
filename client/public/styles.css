@@ -1,0 +1,243 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #e8eaed;
+}
+
+/* scrollbar style */
+.chat-body::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  border-radius: 7px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #e7e7e7;
+}
+
+.join-class {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.join-class h3 {
+  font-size: 60px;
+  line-height: 0.2;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgb(36, 36, 36);
+}
+
+.join-class input {
+  height: 35px;
+  width: 300px;
+  margin-bottom: 25px;
+  border-radius: 11px;
+  padding: 5px 25px;
+  outline: none;
+  border: none;
+}
+
+.join-class button {
+  display: block;
+  border-radius: 23px;
+  width: 160px;
+  height: 40px;
+  font-size: 17px;
+  background: linear-gradient(265.57deg, #0216C7 0.98%, rgba(82, 13, 227, 0.93) 70.42%);
+  color: white;
+  cursor: pointer;
+}
+
+.class {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: 700px;
+  min-width: 1280px;
+  max-width: 1500px;
+  width: 100%;
+  margin: auto;
+}
+
+.room-name {
+  padding-top: 10px;
+}
+
+.room-name p {
+  margin: 0;
+  padding: 5px 10px;
+  background-color: #e6e6e6;
+  display: inline-block;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.video {
+  border-radius: 4px;
+}
+
+.class-live {
+  float: left;
+  width: 65%;
+}
+
+.live-body {
+  box-shadow: 1px 2px 4px 0px rgba(23, 23, 23, 0.2);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px 30px;
+  background-color: #fff;
+  width: 90%;
+  margin: auto;
+}
+
+.class-chat {
+  box-sizing: border-box;
+  float: left;
+  width: 35%;
+  height: 100%;
+}
+
+.chat-container {
+  box-shadow: 1px 2px 4px 0px rgba(23, 23, 23, 0.2);
+  width: 85%;
+  background-color: #ffffff;
+  margin: 0 auto;
+  border-radius: 10px;
+  padding-top: 30px;
+}
+
+.chat-body {
+  height: 500px;
+  overflow: hidden;
+  /* padding-top: 10px; */
+}
+
+.chat-body:hover {
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+.chat-sender {
+  margin: 0 auto;
+  text-align: center;
+  height: 40px;
+  padding: 20px 30px;
+}
+
+.chat-element {
+  clear: both;
+  margin-top: 20px;
+}
+
+.chat-left {
+  padding-left: 30px;
+}
+
+.chat-right {
+  padding-right: 30px;
+}
+
+.chat-left .chat-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(40, 40, 40);
+  padding-bottom: 5px;
+}
+
+.chat-right .chat-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgb(40, 40, 40);
+  padding-bottom: 5px;
+  text-align: right;
+}
+
+.chat-left .chat-time {
+  color: rgb(88, 88, 88);
+  clear: both;
+  font-size: 11px;
+  padding-top: 5px;
+}
+
+.chat-right .chat-time {
+  color: rgb(88, 88, 88);
+  clear: both;
+  font-size: 11px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.chat-left .chat-box {
+  max-width: 75%;
+  float: left;
+  background-color: #d2e3fc;
+  border-radius: 7px;
+  word-wrap: break-word;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.chat-right .chat-box {
+  max-width: 75%;
+  float: right;
+  background-color: #e5e5f0;
+  border-radius: 7px;
+  word-wrap: break-word;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.chat-sender input {
+  box-sizing: border-box;
+  float: left;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 11px;
+  border: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: #e6e6e6;
+  height: 100%;
+  width: 75%;
+}
+
+.chat-sender button {
+  border: none;
+  float: right;
+  font-size: 14px;
+  width: 20%;
+  height: 100%;
+  border-radius: 11px;
+  background-color: rgb(81, 92, 216);
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.chat-sender button:hover {
+  background-color: rgb(64, 74, 179);
+}
