@@ -1,9 +1,9 @@
 import io from 'socket.io-client'; //used to backend to front end
 import { useState } from 'react';
 import Class from './components/Class'
-
+import React from 'react';
 const socket = io.connect("http://localhost:3001")
-//const socket = io.connect("https://kyledeguzman-chitchat.herokuapp.com/");
+
 
 function App() {
   const [username, setUsername] = useState("");
@@ -18,7 +18,7 @@ function App() {
   }
   return (
     <div className="App">
-      {/* {!showChat ?
+      {!showChat ?
         (<section className='join-class'>
           <h3>TLiveClass</h3>
           <input type="text" placeholder="输入学号姓名" onChange={(event) => { setUsername(event.target.value); }}></input>
@@ -27,8 +27,8 @@ function App() {
         </section>)
         :
         (<Class socket={socket} username={username} room={room} />)
-      } */}
-      <Class socket={socket} username={"1952731"} room={"multimedia"}></Class>
+      }
+      {/* <Class socket={socket} username={"1952731"} room={"yzh"}></Class> */}
     </div>
   );
 }

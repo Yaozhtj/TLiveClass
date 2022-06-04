@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import flvjs from 'flv.js';
-
+import Danmaku from 'rc-danmaku';
 var flvPlayer;
 
 function Class({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
+  const danmakuInsRef = useRef(Danmaku);
 
   const getTimeString = (date) => {
     let hours = date.getHours().toString();
@@ -23,23 +24,23 @@ function Class({ socket, username, room }) {
   }
   const [messageList, setMessageList] = useState([{
     room: "a",
-    author: "1952731",
-    message: "你好我好大家好 哈哈哈哈哈哈哈哈 你好啊",
+    author: "1952730",
+    message: "欢迎来到TLiveClass",
+    time: getTimeString(new Date(Date.now()))
+  }, {
+    room: "a",
+    author: "00010",
+    message: "这是一条测试信息",
     time: getTimeString(new Date(Date.now()))
   }, {
     room: "a",
     author: "上善若水",
-    message: "你好我好哈哈哈 你好啊",
+    message: "老师好！",
     time: getTimeString(new Date(Date.now()))
   }, {
     room: "a",
-    author: "上善若水",
-    message: "你好",
-    time: getTimeString(new Date(Date.now()))
-  }, {
-    room: "a",
-    author: "上若水",
-    message: "你好我好你好啊",
+    author: "幸福一生",
+    message: "早上好",
     time: getTimeString(new Date(Date.now()))
   }, {
     room: "a",
@@ -53,10 +54,11 @@ function Class({ socket, username, room }) {
     time: getTimeString(new Date(Date.now()))
   }]);
 
-
-
   const SendMessage = async () => {
     if (currentMessage !== "") {
+      if (danmakuInsRef.current) {
+        danmakuInsRef.current.push(currentMessage);
+      }
       const messageData = {
         room: room,
         author: username,
@@ -73,6 +75,9 @@ function Class({ socket, username, room }) {
     socket.on("receive_message", (data) => {
       console.log(data);
       setMessageList((list) => [...list, data]);
+      if (danmakuInsRef.current) {
+        danmakuInsRef.current.push(data.message);
+      }
     })
   }, [socket]);
   // 移动滚动条到底部
@@ -82,6 +87,11 @@ function Class({ socket, username, room }) {
     chatBody.scrollTop = chatBody.scrollHeight;
   }, [messageList]);
 
+  useEffect(() => {
+    const danmakuIns = new Danmaku('.live-container');
+    danmakuInsRef.current = danmakuIns;
+  }, [])
+
   // useEffect(() => {
   //   flvPlayer = flvjs.createPlayer({
   //     type: 'flv',
@@ -89,19 +99,23 @@ function Class({ socket, username, room }) {
   //     enableWorker: true,
   //     enableStashBuffer: false,
   //     stashInitialSize: 128,
-  //     url: ''
+  //     url: 'http://127.0.0.1:8080/live?app=live&stream=yzh'
   //   });
   //   flvPlayer.attachMediaElement(document.getElementById('class-live'));
   //   flvPlayer.load();
   //   flvPlayer.play();
-  // })
+  // },[])
 
   return (
     <div className="class">
       <div className='class-live'>
         <div className='live-body'>
-          <video className='video' controls width="100%" id='class-live' src={require('../assets/TopThink_01.mp4')} autoPlay muted>
-          </video>
+          <div className="live-container">
+            <video className='video' controls width="100%" id='class-live' src={require('../assets/TopThink_01.mp4')} autoPlay muted>
+            </video>
+            {/* <video className='video' controls width="100%" id='class-live' autoPlay muted>
+          </video> */}
+          </div>
           <div className='room-name'>
             <p>
               {"直播课程：" + room}

@@ -76,7 +76,7 @@ html {
   padding-top: 50px;
   padding-bottom: 50px;
   height: 700px;
-  min-width: 1280px;
+  min-width: 1380px;
   max-width: 1500px;
   width: 100%;
   margin: auto;
@@ -233,11 +233,11 @@ html {
   width: 20%;
   height: 100%;
   border-radius: 11px;
-  background-color: rgb(81, 92, 216);
+  background-color: rgb(74, 127, 203);
   cursor: pointer;
   color: #ffffff;
 }
 
 .chat-sender button:hover {
-  background-color: rgb(64, 74, 179);
+  background-color: rgb(57, 98, 168);
 }
