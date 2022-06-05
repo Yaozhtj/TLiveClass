@@ -1,16 +1,12 @@
 import io from 'socket.io-client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Classroom from './components/Classroom'
-import React from 'react';
 const socket = io.connect("http://localhost:3001")
-
 
 function App() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showClass, setShowClass] = useState(false);
-
-
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
@@ -30,7 +26,7 @@ function App() {
         :
         (<Classroom socket={socket} username={username} room={room} />)
       } */}
-      <Classroom socket={socket} username={"1952731"} room={"yzh"}/>
+      <Classroom socket={socket} username={"1952731"} room={"yzh"} />
     </div>
   );
 }
