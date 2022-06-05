@@ -1,6 +1,6 @@
-import io from 'socket.io-client'; //used to backend to front end
+import io from 'socket.io-client';
 import { useState } from 'react';
-import Class from './components/Class'
+import Classroom from './components/Classroom'
 import React from 'react';
 const socket = io.connect("http://localhost:3001")
 
@@ -8,17 +8,19 @@ const socket = io.connect("http://localhost:3001")
 function App() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
-  const [showChat, setShowChat] = useState(false);
+  const [showClass, setShowClass] = useState(false);
+
+
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
       socket.emit("join_room", room);
-      setShowChat(true);
+      setShowClass(true);
     }
   }
   return (
     <div className="App">
-      {!showChat ?
+      {/* {!showClass ?
         (<section className='join-class'>
           <h3>TLiveClass</h3>
           <input type="text" placeholder="输入学号姓名" onChange={(event) => { setUsername(event.target.value); }}></input>
@@ -26,9 +28,9 @@ function App() {
           <button onClick={joinRoom}>加入课堂</button>
         </section>)
         :
-        (<Class socket={socket} username={username} room={room} />)
-      }
-      {/* <Class socket={socket} username={"1952731"} room={"yzh"}></Class> */}
+        (<Classroom socket={socket} username={username} room={room} />)
+      } */}
+      <Classroom socket={socket} username={"1952731"} room={"yzh"}/>
     </div>
   );
 }
