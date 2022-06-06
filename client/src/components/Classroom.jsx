@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import BulletScreen from 'rc-bullets';
 import flvjs from 'flv.js';
-var flvPlayer;
-var screen;
+var flvPlayer = null
+var screen = null
 function Classroom({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   // 弹幕屏幕
@@ -28,53 +28,33 @@ function Classroom({ socket, username, room }) {
 
   // 初始化聊天室信息
   const [messageList, setMessageList] = useState([{
-    room: "a",
-    author: "1952730",
+    room: "",
+    author: "课堂小助手",
     message: "欢迎来到TLiveClass",
     time: getTimeString(new Date(Date.now()))
   }, {
-    room: "a",
-    author: "00010",
-    message: "这是一条测试信息",
-    time: getTimeString(new Date(Date.now()))
-  }, {
-    room: "a",
-    author: "上善若水",
-    message: "老师好！",
-    time: getTimeString(new Date(Date.now()))
-  }, {
-    room: "a",
-    author: "幸福一生",
-    message: "早上好",
-    time: getTimeString(new Date(Date.now()))
-  }, {
-    room: "a",
-    author: "上水",
-    message: "你好哈哈哈哈哈 你好啊",
-    time: getTimeString(new Date(Date.now()))
-  }, {
-    room: "a",
-    author: "上善若水",
-    message: "你好我好哈哈 你好啊",
+    room: "",
+    author: "课堂小助手",
+    message: "请遵守课堂规则～",
     time: getTimeString(new Date(Date.now()))
   }]);
-  // useEffect(() => {
-  //   flvPlayer = flvjs.createPlayer({
-  //     type: 'flv',
-  //     isLive: false,
-  //     enableWorker: true,
-  //     enableStashBuffer: false,
-  //     stashInitialSize: 128,
-  //     url: 'http://127.0.0.1:8080/live?app=live&stream=yzh'
-  //   });
-  //   flvPlayer.attachMediaElement(document.getElementById('class-live'));
-  //   flvPlayer.load();
-  //   flvPlayer.play();
-  // },[])
-  // 初始化弹幕，给页面中某个元素初始化弹幕屏幕
+  // 初始化flv播放器
   useEffect(() => {
+    flvPlayer = flvjs.createPlayer({
+      type: 'flv',
+      isLive: false,
+      enableWorker: true,
+      enableStashBuffer: false,
+      stashInitialSize: 128,
+      url: `http://127.0.0.1:8080/live?app=live&stream=${room}`
+    });
+    flvPlayer.attachMediaElement(document.getElementById('class-live'));
+    flvPlayer.load();
+    flvPlayer.play()
+
     screen = new BulletScreen('.live-container', { duration: 15 });
   }, []);
+  // 初始化弹幕，给页面中某个元素初始化弹幕屏幕
   // 添加弹幕
   const pushBullet = (message) => {
     screen.push(<div className='live-bullet'>{message} </div>);
@@ -115,16 +95,35 @@ function Classroom({ socket, username, room }) {
       <div className='class-live'>
         <div className='live-body'>
           <div className="live-container">
-            <video className='video' controls width="100%" id='class-live'
+            {/* <video className='video' controls width="100%" id='class-live'
               src={require('../assets/TopThink_01.mp4')} autoPlay muted>
+            </video> */}
+            <video className='video' controls width="100%" id='class-live' autoPlay muted>
             </video>
-            {/* <video className='video' controls width="100%" id='class-live' autoPlay muted>
-          </video> */}
           </div>
           <div className='room-name'>
             <p>
               {"🎓直播课程：" + room}
             </p>
+            <button className='control-button' onClick={() => {
+              if (flvPlayer != null) {
+                flvPlayer.unload();
+                flvPlayer.detachMediaElement();
+                flvPlayer.destroy();
+                flvPlayer = null;
+              }
+              flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                isLive: false,
+                enableWorker: true,
+                enableStashBuffer: false,
+                stashInitialSize: 128,
+                url: `http://127.0.0.1:8080/live?app=live&stream=${room}`
+              });
+              flvPlayer.attachMediaElement(document.getElementById('class-live'));
+              flvPlayer.load();
+              flvPlayer.play();
+            }}>{"刷新"}</button>
             <button className='control-button' onClick={() => {
               if (pause) {
                 screen.resume();
@@ -175,8 +174,12 @@ function Classroom({ socket, username, room }) {
             })}
           </div>
           <div className="chat-sender">
-            <input type="text" placeholder="输入消息" value={currentMessage} onChange={(event) => { setCurrentMessage(event.target.value) }}></input>
-            <button onClick={SendMessage} >发送</button>
+            <input type="text" placeholder="输入消息" onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                SendMessage();
+              }
+            }} value={currentMessage} onChange={(event) => { setCurrentMessage(event.target.value) }}></input>
+            <button onClick={SendMessage}>发送</button>
           </div>
         </div>
       </div>

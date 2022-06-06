@@ -16,7 +16,7 @@ function App() {
   }
   return (
     <div className="App">
-      {/* {!showClass ?
+      {!showClass ?
         (<section className='join-class'>
           <h3>TLiveClass</h3>
           <input type="text" placeholder="输入学号姓名" onChange={(event) => { setUsername(event.target.value); }}></input>
@@ -25,8 +25,8 @@ function App() {
         </section>)
         :
         (<Classroom socket={socket} username={username} room={room} />)
-      } */}
-      <Classroom socket={socket} username={"1952731"} room={"yzh"} />
+      }
+      {/* <Classroom socket={socket} username={"1952731"} room={"yzh"} /> */}
     </div>
   );
 }

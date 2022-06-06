@@ -63,13 +63,15 @@ html {
 
 .join-class button {
   display: block;
-  border-radius: 23px;
+  border-radius: 11px;
   width: 160px;
   height: 40px;
   font-size: 17px;
   background: linear-gradient(265.57deg, #0216C7 0.98%, rgba(82, 13, 227, 0.93) 70.42%);
   color: white;
+  font-weight: bold;
   cursor: pointer;
+  border: none;
 }
 
 .class {
